@@ -1,3 +1,7 @@
+difference=0;
+rightWristx=0;
+leftWristX=0;
+
 function setup(){
     video=createCapture(VIDEO);
     video.size(550,500);
@@ -11,6 +15,11 @@ function setup(){
     
     function draw(){
         background('#1F51FF')
+        document.getElementById("font_size").innerHTML="width and height of a name will be" + difference + "px"; 
+        textSize(difference)
+        fill('#F0FFFF');
+        text('Alaina',50,400);
+        
     }
     
     function modelLoaded(){
@@ -19,4 +28,9 @@ function setup(){
     
     function getPoses(results){
         if(results.length> 0){console.log(results)}
+        leftWristX=results[0].pose.leftWrist.x;
+        rightWristX=results[0].pose.rightWrist.x;
+        
+        difference=floor(leftWristX-rightWristX);
+        console.log("leftWristX=" + leftWristX + "rightWristX=" + rightWristX + "difference=" + difference )
     }
